@@ -44,19 +44,6 @@ export default function Home() {
     localStorage.setItem("responses", JSON.stringify(responsesByTest))
   }, [responsesByTest])
 
-// Fonctions de tests
-  useEffect(() => {
-    (window as any).fillAll = (val = currentTest.scaleMax) => {
-      const filled = Array(totalQuestions).fill(val)
-      setResponsesByTest(prev => ({ ...prev, [selectedTest]: filled }))
-    }
-    (window as any).resetAll = () => {
-      const reset = Array(totalQuestions).fill(0)
-      setResponsesByTest(prev => ({ ...prev, [selectedTest]: reset }))
-    }
-    (window as any).resetOne = (i: number) => handleChange(i, 0, false)
-  }, [selectedTest, totalQuestions])
-
   const handleChange = (index: number, value: number, doScroll = true) => {
     const updated = [...responses]
     updated[index] = value
@@ -70,6 +57,24 @@ export default function Home() {
       }
     }
   }
+
+  const handleReset = () => {
+    const reset = Array(totalQuestions).fill(0)
+    setResponsesByTest(prev => ({ ...prev, [selectedTest]: reset }))
+  }
+
+  // Fonctions de tests
+    // useEffect(() => {
+    //   window.fillAll = (val = currentTest.scaleMax) => {
+    //     const filled = Array(totalQuestions).fill(val)
+    //     setResponsesByTest(prev => ({ ...prev, [selectedTest]: filled }))
+    //   }
+    //   window.resetAll = () => {
+    //     const reset = Array(totalQuestions).fill(0)
+    //     setResponsesByTest(prev => ({ ...prev, [selectedTest]: reset }))
+    //   }
+    //   window.resetOne = (i: number) => handleChange(i, 0, false)
+    // }, [selectedTest, totalQuestions, currentTest.scaleMax, handleChange])
 
   const generatePDF = async () => {
     const doc = new jsPDF()
@@ -272,7 +277,7 @@ export default function Home() {
       {currentTest.sections.map((section, secIndex) => (
         <div key={secIndex} className="rounded-lg p-6 mb-4 bg-white shadow">
           <h2 className="text-xl font-semibold mb-4">{section.title[language]}</h2>
-          {section.questions.map((q, qIndex) => {
+          {section.questions.map(q => {
             const index = allQuestions.findIndex(qq => qq.number === q.number)
             return (
               <Card
@@ -342,7 +347,7 @@ export default function Home() {
         )}
 
         <div className="flex flex-wrap w-full justify-between gap-4">
-          <Button variant="destructive" onClick={() => (window as any).resetAll()} className="w-50 flex-1 min-w-[200px]">
+          <Button variant="destructive" onClick={handleReset} className="w-50 flex-1 min-w-[200px]">
             {language === 'fr' ? 'Réinitialiser' : language === 'en' ? 'Reset' : 'リセット'}
           </Button>
 

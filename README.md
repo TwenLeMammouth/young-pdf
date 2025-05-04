@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 MindTracker – Tests psychologiques offline et privés
 
-## Getting Started
+Bienvenue dans **MindTracker**, une application simple et élégante pour remplir des **questionnaires psychologiques** directement depuis votre navigateur, sans inscription, sans tracking, et sans envoi de données.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Objectif du projet
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ce projet est né d’un double besoin personnel et technique :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Côté personnel** : avoir un outil pratique pour remplir des tests psychologiques de manière régulière, avec un vrai respect de la confidentialité.
+- **Côté technique** : progresser en développement fullstack avec Next.js (App Router), TypeScript, Tailwind CSS, gestion multilingue, génération de PDF et accessibilité.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Le projet a été conçu comme une application web statique, sans base de données, 100% **offline-friendly**. Les réponses sont **stockées uniquement en local** (dans `localStorage`), et l’utilisateur peut exporter ses résultats au format PDF.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧪 Questionnaires disponibles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Nom du test           | Description                                                             | Questions | Langues |
+|-----------------------|-------------------------------------------------------------------------|-----------|---------|
+| SCS - Self Compassion Scale | Mesure l’auto-compassion, l’équilibre émotionnel et la bienveillance envers soi. | 26        | FR / EN / JP |
+| Big Five 120          | Test de personnalité complet basé sur le modèle OCEAN (5 traits principaux). | 120       | FR / EN / JP |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ❌ YSQ – Young Schema Questionnaire
 
-## Deploy on Vercel
+Le projet utilisait initialement une version traduite du **YSQ** (Young Schema Questionnaire), mais ce test est **protégé par des droits** et nécessite une licence d’utilisation. Il a donc été retiré du dépôt public pour respecter les conditions de diffusion.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔒 Respect de la vie privée
+
+> 🛑 Aucune donnée personnelle n’est collectée, enregistrée ou transmise.  
+> ✅ Vos réponses restent uniquement sur votre appareil.  
+> 📄 Vous pouvez exporter un **PDF clair et lisible** avec toutes vos réponses et un résumé intelligent.  
+> 🧠 Aucun tracking de comportement ni analytics côté utilisateur (optionnel via Vercel Analytics).
+
+---
+
+## 🧱 Stack technique
+
+- **Next.js 14 App Router**
+- **TypeScript**
+- **Tailwind CSS**
+- **jsPDF** pour la génération de PDF
+- **LocalStorage** pour la persistance offline
+- **Accessibilité (WAI-ARIA)** prise en compte
+- **Internationalisation** (FR, EN, JP)
+- **Responsive design** optimisé mobile & desktop
+- **Vercel** pour l’hébergement et l’analyse de trafic (anonymisé)
+
+---
+
+## 🌐 Déploiement
+
+Le site est déployé sur Vercel (gratuit). Le code est optimisé pour le **statique** et ne nécessite pas de backend.
+
+---
+
+## 📦 Fonctionnalités principales
+
+- 🎯 Sélection de test
+- 🔁 Enregistrement automatique des réponses
+- 🔍 Navigation fluide entre les questions
+- 📊 Résumé clair et coloré des résultats
+- 🖨️ Export PDF complet
+- 🌐 Multilingue
+- 📱 Responsive & UX douce
+- 📢 Partage sur les réseaux sociaux (Twitter, Facebook, LinkedIn)
+
+---
+
+## 👤 À propos
+
+Projet conçu et développé par **TwenLeMammouth**, à la fois comme un projet personnel et un exercice de progression.  
+Merci aux ressources libres et aux traducteurs pour les versions FR/JP des questionnaires.
+
+---
+
+## 📝 Licence
+
+Ce projet est open source, mais les **questionnaires officiels** (comme le YSQ) peuvent être soumis à des droits.  
+Les versions SCS et Big Five sont fournies à titre **informatif uniquement**, sans prétention de diagnostic professionnel.
+
+---
+
+## 🙏 Remerciements
+
+- Les auteurs des tests originaux (Kristin Neff pour le SCS, Costa & McCrae pour le Big Five)
+- Les contributeurs de contenu libre en psychologie
+- Tous ceux qui aident à faire avancer l’accessibilité et la transparence numérique
+
+---
+
+## 📬 Contact
+
+Vous pouvez me contacter pour suggestions, bugs ou simplement discuter :  
+📧 [vgroslier@gmail.com]  
+

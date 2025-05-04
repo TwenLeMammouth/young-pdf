@@ -23,6 +23,7 @@ export function LanguageSelect({ language, setLanguage }: { language: Language, 
       <button
         onClick={() => setOpen(prev => !prev)}
         className="w-full flex items-center justify-between gap-2 px-3 py-2 border rounded-md bg-white shadow-sm text-sm hover:bg-gray-50"
+        aria-label="Changer de langue / Change language"
         aria-haspopup="listbox"
       >
         <div className="flex items-center gap-2">
@@ -42,6 +43,7 @@ export function LanguageSelect({ language, setLanguage }: { language: Language, 
               key={l.code}
               className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
               role="option"
+              aria-selected={l.code === current.code}
               onClick={() => {
                 setLanguage(l.code)
                 setOpen(false)

@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ children, variant = 'default', className = '', ...props }: Props) {
-  let base =
+  const base =
     "px-4 py-2 rounded font-semibold transition duration-150 focus:outline-none focus:ring-2"
 
   let styles = ""
