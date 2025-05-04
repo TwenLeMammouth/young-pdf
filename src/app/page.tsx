@@ -6,6 +6,9 @@ import { Card } from "@/components/ui/card"
 import { CardContent } from "@/components/ui/card-content"
 import { ScoreButtons } from "@/components/ui/score-buttons"
 import { jsPDF } from "jspdf"
+import addNotoSansJPRegular from "@/lib/fonts/NotoSansJP-normal"
+import addNotoSansJPBold from "@/lib/fonts/NotoSansJP-bold"
+
 import { DisclaimerModal } from '@/components/popup/disclaimer'
 import { RatingScaleModal } from '@/components/popup/rating-scale'
 import { LanguageSelect } from '@/components/ui/language-select'
@@ -32,6 +35,11 @@ export default function Home() {
   const totalQuestions = allQuestions.length
   const responses = responsesByTest[selectedTest] || Array(totalQuestions).fill(0)
   const isAllAnswered = responses.every(r => r > 0)
+
+  useEffect(() => {
+    addNotoSansJPRegular(jsPDF.API)
+    addNotoSansJPBold(jsPDF.API)
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -78,6 +86,8 @@ export default function Home() {
 
   const generatePDF = async () => {
     const doc = new jsPDF()
+
+    const fontFamily = language === "jp" ? "NotoSansJP" : "helvetica"
     
     const loadImage = (src: string): Promise<HTMLImageElement> =>
       new Promise((resolve) => {
@@ -101,10 +111,12 @@ export default function Home() {
     doc.addImage(badge, 'PNG', pageWidth - badgeWidth - 85, 5, badgeWidth, badgeHeight)
 
     doc.setFontSize(14);
-    doc.setFont("helvetica", "bold");
+    doc.setFont(fontFamily, "bold")
+    
     doc.text(`${currentTest.title[language]}`, 10, 30)
     doc.setFontSize(12)
-    doc.setFont("helvetica", "normal");
+    doc.setFont(fontFamily, "normal")
+    
     doc.text(`${uiLabels.name[language]}: ${name || "___________"}    ${uiLabels.date[language]}: ${date}`, 10, 38)
   
     let y = 55
@@ -113,8 +125,8 @@ export default function Home() {
     if (currentTest.getSummary) {
       const summary = currentTest.getSummary(responses, language, allQuestions)
       const summaryBlocks = summary.split("\n\n");
-  
-      doc.setFont("helvetica", "bold");
+    
+      doc.setFont(fontFamily, "bold")
       doc.text(language === 'fr' ? 'Résumé' : language === 'en' ? 'Summary' : '要約', 10, y);
       y += 8;
   
@@ -137,12 +149,12 @@ export default function Home() {
           doc.setTextColor(0, 0, 0) // couleur par défaut (noir)
         }
       
-        doc.setFont("helvetica", "bold")
+        doc.setFont(fontFamily, "normal")
         doc.text(`${title.trim()}:`, 10, y)
         y += 5
       
         doc.setTextColor(0, 0, 0)
-        doc.setFont("helvetica", "normal")
+        // doc.setFont("helvetica", "normal")
         const wrapped = doc.splitTextToSize(content, 180)
         doc.text(wrapped, 10, y)
         y += wrapped.length * 8
